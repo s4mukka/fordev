@@ -11,6 +11,7 @@
         "indent": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "no-unused-vars": "off",
-        "no-tabs": 0
+        "no-tabs": 0,
+        "@typescript-eslint/strict-boolean-expressions": "off"
     }
 }
