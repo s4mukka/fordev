@@ -1,10 +1,13 @@
 {
-    "extends": "standard-with-typescript",
+	"extends": "standard-with-typescript",
     "parserOptions": {
         "project": "./tsconfig.json"
     },
     "rules": {
         "@typescript-eslint/consistent-type-definitions": "off",
-        "@typescript-eslint/strict-boolean-expression": "off"
+        "@typescript-eslint/strict-boolean-expression": "off",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/indent": ["error", "tab", 4],
+        "no-tabs": 0
     }
 }
