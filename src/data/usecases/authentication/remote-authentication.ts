@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { HttpPostClient } from 'data/protocols/http/http-post-client'
+import { HttpPostClient } from '../../protocols/http/http-post-client'
 
 export class RemoteAuthentication {
     constructor (
