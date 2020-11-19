@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AuthenticationParams } from '@/domain/usecases/authentication'
 import faker from 'faker'
 
