@@ -95,20 +95,5 @@ button {
                 text-decoration: underline;
             }
         }
-
-        .errorWrap {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-
-            .spinner {
-                margin-top: 30px;
-            }
-
-            .error {
-                margin-top: 30px;
-                color: $primaryLight;
-            }
-        }
     }
 }
