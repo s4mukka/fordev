@@ -4,9 +4,9 @@ import Styles from './login-styles.scss'
 
 import { Validation } from '@/presentation/protocols/validation'
 
-import { Footer, FormStatus, Input, LoginHeader } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 import { Authentication } from '@/domain/usecases'
+import { Footer, FormStatus, Input, LoginHeader } from '@/presentation/components'
 
 type Props = {
     validation: Validation
@@ -34,19 +34,27 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
 
-        if (state.isLoading || state.emailError || state.passwordError) {
-            return
+        try {
+            if (state.isLoading || state.emailError || state.passwordError) {
+                return
+            }
+
+            setState({
+                ...state,
+                isLoading: true
+            })
+
+            await authentication.auth({
+                email: state.email,
+                password: state.password
+            })
+        } catch (error) {
+            setState({
+                ...state,
+                isLoading: false,
+                messageError: error.message
+            })
         }
-
-        setState({
-            ...state,
-            isLoading: true
-        })
-
-        await authentication.auth({
-            email: state.email,
-            password: state.password
-        })
     }
 
     return (
