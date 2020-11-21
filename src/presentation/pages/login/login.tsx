@@ -32,6 +32,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
             emailError: validation.validate('email', state.email),
             passwordError: validation.validate('password', state.password)
         })
+        console.log(state.emailError, state.passwordError)
     }, [state.email, state.password])
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -52,7 +53,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
                 password: state.password
             })
 
-            localStorage.setItem('accesToken', account.accesToken)
+            localStorage.setItem('accessToken', account.accessToken)
             history.replace('/')
         } catch (error) {
             setState({
