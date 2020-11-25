@@ -1,0 +1,65 @@
+@import "../../styles/colors.scss";
+
+.signup {
+    height: 100vh;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    .form {
+        padding: 40px;
+
+        width: 400px;
+
+        background: $white;
+
+        border-radius: 8px;
+
+        box-shadow: 0px 1px 3px -1px $black;
+
+        display: flex;
+        align-self: center;
+        flex-direction: column;
+
+        h2 {
+            font-size: 20px;
+            text-transform: uppercase;
+            text-align: center;
+
+            color: $primaryDark;
+        }
+
+        .submit {
+            margin-top: 32px;
+
+            &:disabled {
+                color: $disabledColor;
+                
+                background: $disabledBackground;
+
+                &:hover {
+                    opacity: 1;
+
+                    cursor: default;
+                }
+            }
+
+        }
+
+        .link {
+            margin-top: 16px;
+
+            text-transform: lowercase;
+            text-align: center;
+
+            color: $primary;
+
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
