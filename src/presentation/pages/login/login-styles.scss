@@ -30,21 +30,8 @@
             color: $primaryDark;
         }
 
-        .submit {
+        button {
             margin-top: 32px;
-
-            &:disabled {
-                color: $disabledColor;
-                
-                background: $disabledBackground;
-
-                &:hover {
-                    opacity: 1;
-
-                    cursor: default;
-                }
-            }
-
         }
 
         .link {

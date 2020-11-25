@@ -45,4 +45,16 @@ button {
     &:hover {
         opacity: 0.9;
     }
+
+    &:disabled {
+        color: $disabledColor;
+        
+        background: $disabledBackground;
+
+        &:hover {
+            opacity: 1;
+
+            cursor: default;
+        }
+    }
 }
