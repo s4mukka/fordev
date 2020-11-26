@@ -1,13 +1,66 @@
+@import "../../styles/colors.scss";
+
 .inputWrap {
     position: relative;
 
-    margin-top: 16px;
+    margin-top: 40px;
 
-    display: flex;
-    align-items: center;
+    border-bottom: 2px dashed $disabledColor;
+
+    &::after {
+        position: absolute;
+
+        left: 0px;
+        bottom: -2px;
+
+        width: 100%;
+        height: 2px;
+
+        content: "";
+
+        background: $primaryLight;
+
+        transform-origin: 0%;
+        transform: scaleX(0);
+        transition: all 0.3s ease-out;
+    }
+
+    &:focus-within {
+        border-color: transparent;
+
+        &::after {
+            transform: scaleX(1);
+        }
+
+        label {
+            transform: scale(0.8) translateY(-20px);
+        }
+    }
 
     input {
-        flex-grow: 1;
+        padding: 0px 40px 4px 8px;
+
+        width: 100%;
+        line-height: 24px;
+
+        &:not(:placeholder-shown) + label {
+            transform: scale(0.8) translateY(-20px);
+        }
+    }
+
+    label {
+        position: absolute;
+
+        left: 8px;
+        bottom: 8px;
+
+        color: $disabledColor;
+
+        cursor: text;
+
+        transform-origin: 0%;
+        transform: translateY(0);
+        transition: all 0.3s ease-out;
     }
 
     .status {
@@ -15,7 +68,7 @@
 
         right: 8px;
 
-        font-size: 12px;
+        font-size: 10px;
 
         cursor: help;
     }
