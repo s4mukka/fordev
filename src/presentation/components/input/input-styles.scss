@@ -7,6 +7,22 @@
 
     border-bottom: 2px dashed $disabledColor;
 
+    &[data-status="valid"] {
+        border-bottom-color: $valid;
+
+        &::after {
+            background-color: $valid;
+        }
+    }
+
+    &[data-status="invalid"] {
+        border-bottom-color: $invalid;
+
+        &::after {
+            background-color: $invalid;
+        }
+    }
+
     &::after {
         position: absolute;
 
@@ -18,7 +34,7 @@
 
         content: "";
 
-        background: $primaryLight;
+        background: $disabledColor;
 
         transform-origin: 0%;
         transform: scaleX(0);
