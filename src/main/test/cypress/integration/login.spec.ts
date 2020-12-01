@@ -1,4 +1,4 @@
-import * as Http from './login-mocks'
+import * as Http from '../support/login-mocks'
 import * as FormHelper from '../support/form-helper'
 
 import faker from 'faker'
