@@ -1,6 +1,6 @@
 @import "../../styles/colors.scss";
 
-.header {
+.headerWrap {
     background: $primary;
 
     border-top: 40px solid $primaryDark;
@@ -18,5 +18,11 @@
         margin: 16px 0px 40px;
 
         color: $white;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .headerWrap {
+        border-top-width: 20px;
     }
 }
