@@ -71,23 +71,8 @@
                     .iconWrap {
                         position: absolute;
 
-                        padding: 10px;
-
                         top: -10px;
                         right: -10px;
-
-                        border-radius: 100%;
-                        box-shadow: 0px 1px 3px -1px $black;
-
-                        display: flex;
-
-                        &.red {
-                            background: $invalid;
-                        }
-
-                        &.green {
-                            background: $valid;
-                        }
                     }
 
                     time {
