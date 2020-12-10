@@ -9,58 +9,6 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .headerWrap {
-        background: $primary;
-
-        border-top: 40px solid $primaryDark;
-
-        display: flex;
-        justify-content: center;
-
-        .headerContent {
-            padding: 24px 40px;
-
-            max-width: 800px;
-
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            flex-grow: 1;
-
-            img {
-                width: 60px;
-
-                align-self: center;
-            }
-
-            .logoutWrap {
-                color: $white;
-
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-end;
-                align-self: center;
-
-                span {
-                    margin-bottom: 8px;
-
-                    font-size: 16px;
-                }
-
-                a {
-                    color: $white;
-
-                    text-decoration: none;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
-        }
-    }
-
     .contentWrap {
         padding: 40px;
 
