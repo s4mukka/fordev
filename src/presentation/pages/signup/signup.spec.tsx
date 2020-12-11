@@ -6,6 +6,7 @@ import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 
 import { AccountModel } from '@/domain/models'
 import { EmailInUseError } from '@/domain/errors'
+
 import { ApiContext } from '@/presentation/contexts'
 import { AddAccountSpy, Helper, ValidationStub } from '@/presentation/test'
 import { SignUp } from '@/presentation/pages'
@@ -60,9 +61,9 @@ describe('SignUp Component', () => {
     test('Should start with initial state', () => {
         const validationError = faker.random.words()
         makeSut({ validationError })
-        Helper.testChildCount('error-wrap', 0)
+        expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
 
-        Helper.testButtonIsDisabled('submit', true)
+        expect(screen.getByTestId('submit')).toBeDisabled()
 
         Helper.testStatusForField('name', validationError)
         Helper.testStatusForField('email', validationError)
@@ -146,7 +147,7 @@ describe('SignUp Component', () => {
         Helper.populateField('password')
         Helper.populateField('passwordConfirmation')
 
-        Helper.testButtonIsDisabled('submit', false)
+        expect(screen.getByTestId('submit')).toBeEnabled()
     })
 
     test('Should show spinner on submit', async () => {
@@ -154,7 +155,7 @@ describe('SignUp Component', () => {
 
         await simulateValidSubmit()
 
-        Helper.testElementExist('spinner')
+        expect(screen.queryByTestId('spinner')).toBeInTheDocument()
     })
 
     test('Should call AddAccount with correct values', async () => {
@@ -199,8 +200,8 @@ describe('SignUp Component', () => {
 
         await simulateValidSubmit()
 
-        Helper.testElementText('message-error', error.message)
-        Helper.testChildCount('error-wrap', 1)
+        expect(screen.getByTestId('message-error')).toHaveTextContent(error.message)
+        expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
     })
 
     test('Should call SaveAccessToken on success', async () => {

@@ -6,9 +6,9 @@ import { fireEvent, render, waitFor, screen } from '@testing-library/react'
 
 import { AccountModel } from '@/domain/models'
 import { InvalidCredentialsError } from '@/domain/errors'
+
 import { ApiContext } from '@/presentation/contexts'
 import { ValidationStub, AuthenticationSpy, Helper } from '@/presentation/test'
-
 import { Login } from '@/presentation/pages'
 
 type SutTypes = {
@@ -59,9 +59,9 @@ describe('Login Component', () => {
     test('Should start with initial state', () => {
         const validationError = faker.random.words()
         makeSut({ validationError })
-        Helper.testChildCount('error-wrap', 0)
+        expect(screen.getByTestId('error-wrap').children).toHaveLength(0)
 
-        Helper.testButtonIsDisabled('submit', true)
+        expect(screen.getByTestId('submit')).toBeDisabled()
 
         Helper.testStatusForField('email', validationError)
 
@@ -108,7 +108,7 @@ describe('Login Component', () => {
         Helper.populateField('email')
         Helper.populateField('password')
 
-        Helper.testButtonIsDisabled('submit', false)
+        expect(screen.getByTestId('submit')).toBeEnabled()
     })
 
     test('Should show spinner on submit', async () => {
@@ -116,7 +116,7 @@ describe('Login Component', () => {
 
         await simulateValidSubmit()
 
-        Helper.testElementExist('spinner')
+        expect(screen.queryByTestId('spinner')).toBeInTheDocument()
     })
 
     test('Should call Authentication with correct values', async () => {
@@ -158,8 +158,9 @@ describe('Login Component', () => {
 
         await simulateValidSubmit()
 
-        Helper.testElementText('message-error', error.message)
-        Helper.testChildCount('error-wrap', 1)
+        expect(screen.getByTestId('message-error')).toHaveTextContent(error.message)
+
+        expect(screen.getByTestId('error-wrap').children).toHaveLength(1)
     })
 
     test('Should call SaveAccessToken on success', async () => {
