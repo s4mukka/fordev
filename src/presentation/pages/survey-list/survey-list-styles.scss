@@ -29,25 +29,5 @@
             font-weight: bold;
             text-transform: uppercase;
         }
-
-        ul {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-    }
-}
-
-
-@media only screen and (max-width: 600px) {
-    .surveyListWrap {
-        
-        .contentWrap {
-    
-            ul {
-                flex-direction: column;
-            }
-        }
     }
 }
