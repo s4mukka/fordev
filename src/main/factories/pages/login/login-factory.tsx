@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { makeRemoteAuthentication } from '@/main/factories/usecases/authentication/remote-authentication-factory'
+import { makeRemoteAuthentication } from '@/main/factories/usecases'
 import { makeLoginValidation } from './login-validation-factory'
 
 import { Login } from '@/presentation/pages'
