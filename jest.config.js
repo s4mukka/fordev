@@ -7,6 +7,8 @@ module.exports = {
         '!<rootDir>/src/domain/models/**/*',
         '!<rootDir>/src/domain/usecases/**/*',
         '!<rootDir>/src/validation/protocols/**/*',
+        '!<rootDir>/src/presentation/pages/index.ts',
+        '!<rootDir>/src/presentation/components/index.ts',
         '!**/*.d.ts'
     ],
     coverageDirectory: 'coverage',
