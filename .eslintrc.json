@@ -23,11 +23,13 @@
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/comma-spacing": "off",
         "@typescript-eslint/return-await": "off",
+        "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/indent": "off",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "no-unused-vars": "off",
+        "import/export": "off",
         "indent": "off",
         "no-tabs": 0
     }
