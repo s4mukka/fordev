@@ -18,4 +18,10 @@ describe('SurveyList', () => {
         cy.visit('')
         cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
     })
+
+    it('Should logount on AccessDeniedError', () => {
+        Http.mockAccessDeniedError()
+        cy.visit('')
+        Helper.testUrl('/login')
+    })
 })
