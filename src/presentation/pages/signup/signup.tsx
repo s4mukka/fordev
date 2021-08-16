@@ -86,8 +86,8 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
                     <h2>Criar Conta</h2>
                     <Input type="text" name="name" placeholder="Digite seu nome"/>
                     <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-                    <Input type="password" name="password" placeholder="Digite sua senha"/>
-                    <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha"/>
+                    <Input type="password" name="password" placeholder="Digite sua senha" autoComplete="off"/>
+                    <Input type="password" name="passwordConfirmation" placeholder="Repita sua senha" autoComplete="off"/>
                         <SubmitButton text="Cadastrar"/>
                     <Link data-testid="login-link" replace to="/login" className={Styles.link}>Voltar Para Login</Link>
                     <FormStatus />

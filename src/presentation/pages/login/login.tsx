@@ -74,7 +74,7 @@ const Login: React.FC<Props> = ({ validation, authentication }: Props) => {
                 <form data-testid="form" className={Styles.form} onSubmit={handleSubmit}>
                     <h2>Login</h2>
                     <Input type="email" name="email" placeholder="Digite seu e-mail"/>
-                    <Input type="password" name="password" placeholder="Digite sua senha"/>
+                    <Input type="password" name="password" placeholder="Digite sua senha" autoComplete="off"/>
                     <SubmitButton text="Entrar"/>
                     <Link data-testid="signup-link" to="/signup" className={Styles.link}>Criar conta</Link>
                     <FormStatus />

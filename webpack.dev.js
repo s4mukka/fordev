@@ -1,5 +1,6 @@
 const { DefinePlugin } = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const common = require('./webpack.common')
 const { merge } = require('webpack-merge')
 
@@ -24,6 +25,7 @@ module.exports = merge(common, {
             }]
         }]
     },
+    devtool: 'inline-source-map',
     devServer: {
         contentBase: './public',
         writeToDisk: true,
@@ -36,6 +38,9 @@ module.exports = merge(common, {
         }),
         new HtmlWebpackPlugin({
             template: './template.dev.html'
+        }),
+        new FaviconsWebpackPlugin({
+            logo: './public/favicon.png'
         })
     ]
 })
