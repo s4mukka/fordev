@@ -1,6 +1,6 @@
-import * as Http from '../support/signup-mocks'
-import * as Helper from '../support/helpers'
-import * as FormHelper from '../support/form-helpers'
+import * as Http from '../utils/signup-mocks'
+import * as Helper from '../utils/helpers'
+import * as FormHelper from '../utils/form-helpers'
 
 import faker from 'faker'
 
