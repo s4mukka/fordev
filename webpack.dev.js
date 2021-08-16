@@ -27,10 +27,12 @@ module.exports = merge(common, {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './public',
+        contentBase: './dist',
+        publicPath: './dist',
         writeToDisk: true,
         historyApiFallback: true,
-        open: true
+        open: true,
+        port: 8080
     },
     plugins: [
         new DefinePlugin({
