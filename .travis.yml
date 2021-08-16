@@ -7,7 +7,7 @@ addons:
 cache:
   yarn: true
   directories:
-    - ~/.cache
+    - node_modules
 script:
   - eslint 'src/**'
   - yarn test:coveralls
