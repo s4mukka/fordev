@@ -10,28 +10,32 @@ const SurveyResult: React.FC = () => {
         <div className={Styles.surveyResultWrap}>
             <Header />
             <div className={Styles.contentWrap}>
-                <hgroup>
-                    <Calendar date={new Date()} className={Styles.calendarWrap}/>
-                    <h2>Qual é seu framework web favorito?</h2>
-                </hgroup>
-                <FlipMove className={Styles.answersList}>
-                    <li>
-                        <img src="https://fordevs.herokuapp.com/static/img/logo-react.png"/>
-                        <span className={Styles.answer}>ReactJS</span>
-                        <span className={Styles.percent}>50%</span>
-                    </li>
-                    <li className={Styles.active}>
-                        <img src="https://fordevs.herokuapp.com/static/img/logo-vue.png"/>
-                        <span className={Styles.answer}>Vue</span>
-                        <span className={Styles.percent}>30%</span>
-                    </li>
-                    <li>
-                        <img src="https://fordevs.herokuapp.com/static/img/logo-angular.png"/>
-                        <span className={Styles.answer}>Angular</span>
-                        <span className={Styles.percent}>20%</span>
-                    </li>
-                </FlipMove>
-                <button>Voltar</button>
+                { true && (
+                    <>
+                        <hgroup>
+                            <Calendar date={new Date()} className={Styles.calendarWrap}/>
+                            <h2>Qual é seu framework web favorito?</h2>
+                        </hgroup>
+                        <FlipMove className={Styles.answersList}>
+                            <li>
+                                <img src="https://fordevs.herokuapp.com/static/img/logo-react.png"/>
+                                <span className={Styles.answer}>ReactJS</span>
+                                <span className={Styles.percent}>50%</span>
+                            </li>
+                            <li className={Styles.active}>
+                                <img src="https://fordevs.herokuapp.com/static/img/logo-vue.png"/>
+                                <span className={Styles.answer}>Vue</span>
+                                <span className={Styles.percent}>30%</span>
+                            </li>
+                            <li>
+                                <img src="https://fordevs.herokuapp.com/static/img/logo-angular.png"/>
+                                <span className={Styles.answer}>Angular</span>
+                                <span className={Styles.percent}>20%</span>
+                            </li>
+                        </FlipMove>
+                        <button>Voltar</button>
+                    </>
+                )}
                 {false && <Loading />}
             </div>
             <Footer />
