@@ -26,7 +26,7 @@ const Input: React.FC<Props> = (props: Props) => {
                 placeholder=" "
                 readOnly
                 onFocus={event => { event.target.readOnly = false }}
-                onChange={event => setState({ ...state, [event.target.name]: event.target.value })}
+                onChange={event => setState(old => ({ ...old, [event.target.name]: event.target.value }))}
             />
             <label
                 data-testid={`${props.name}-label`}
