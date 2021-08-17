@@ -1,13 +1,12 @@
 export interface LoadSurveyResult {
-    load: () => Promise<LoadSurveyResult.Model[]>
+    load: () => Promise<LoadSurveyResult.Model>
 }
 
 export namespace LoadSurveyResult {
     export type Model = {
-        surveyId: string
         question: string
         answers: AnswerResult[]
-        date: string
+        date: Date
     }
 }
 
@@ -16,5 +15,4 @@ type AnswerResult = {
     answer: string
     count: number
     percent: number
-    isCurrentAccountAnswer: boolean
 }
