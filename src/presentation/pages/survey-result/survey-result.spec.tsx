@@ -1,7 +1,7 @@
 import React from 'react'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 
 import { SurveyResult } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
@@ -106,5 +106,20 @@ describe('SurveyResult Component', () => {
 
         expect(setCurrentAccountMock).toHaveBeenCalledWith(undefined)
         expect(history.location.pathname).toBe('/login')
+    })
+
+    test('Should call LoadSurveyResult on reload', async () => {
+        const loadSurveyResultSpy = new LoadSurveyResultSpy()
+        jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new UnexpectedError())
+
+        makeSut(loadSurveyResultSpy)
+
+        await waitFor(() => screen.getByTestId('survey-result'))
+
+        fireEvent.click(screen.getByTestId('reload'))
+
+        await waitFor(() => screen.getByTestId('survey-result'))
+
+        expect(loadSurveyResultSpy.callsCount).toBe(1)
     })
 })
