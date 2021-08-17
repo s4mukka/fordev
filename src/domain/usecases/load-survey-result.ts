@@ -15,4 +15,5 @@ type AnswerResult = {
     answer: string
     count: number
     percent: number
+    isCurrentAccountAnswer: boolean
 }
