@@ -56,20 +56,26 @@
     }
 
     footer {
-        color: $white;
-
-        line-height: 40px;
-        text-transform: lowercase;
-        text-align: center;
-
+        
         border-radius: 0px 0px 8px 8px;
-
+        
         background: $primary;
-
+        
         cursor: pointer;
 
         &:hover {
             background: $primaryDark;
+        }
+
+        a {
+            color: $white;
+    
+            line-height: 40px;
+            text-transform: lowercase;
+            text-align: center;
+            text-decoration: none;
+
+            display: block;
         }
     }
 }
