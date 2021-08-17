@@ -7,7 +7,7 @@ import { LoadSurveyList } from '@/domain/usecases'
 import { useErrorHandler } from '@/presentation/hooks'
 import { Header, Footer, Error } from '@/presentation/components'
 
-import { SurveyContext, SurveyListItem } from './components'
+import { SurveyListItem } from './components'
 
 type Props = {
     loadSurveyList: LoadSurveyList
@@ -42,13 +42,11 @@ const SurveyList: React.FC<Props> = ({ loadSurveyList }: Props) => {
             <Header />
             <div className={Styles.contentWrap}>
                 <h2>Enquetes</h2>
-                <SurveyContext.Provider value={{ state, setState }} >
-                    {
-                        state.error
-                            ? <Error error={state.error} reload={handleReload}/>
-                            : <SurveyListItem />
-                    }
-                </SurveyContext.Provider>
+                {
+                    state.error
+                        ? <Error error={state.error} reload={handleReload}/>
+                        : <SurveyListItem surveys={state.surveys} />
+                }
             </div>
             <Footer />
         </div>
