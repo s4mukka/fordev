@@ -11,6 +11,7 @@ export const mockLoadOk = (): LoadSurveyResult.Model => {
 }
 
 export const mockSaveUnexpectedError = (): void => Http.mockServerError(/surveys/, 'PUT')
+export const mockSaveAccessDeniedError = (): void => Http.mockForbiddenError(/surveys/, 'PUT')
 
 const mockSurveyResultModel = (): LoadSurveyResult.Model => ({
     question: faker.random.words(),
