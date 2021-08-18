@@ -10,7 +10,7 @@ describe('SurveyResult', () => {
 
     it('Should present error on UnexpectedError', () => {
         Http.mockUnexpectedError()
-        cy.visit('/surveys/any_id')
+        cy.visit(`/surveys/${faker.datatype.uuid()}`)
         cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
     })
 
@@ -21,5 +21,11 @@ describe('SurveyResult', () => {
         Http.mockOk()
         cy.getByTestId('reload').click()
         cy.getByTestId('question').should('exist')
+    })
+
+    it('Should logount on AccessDeniedError', () => {
+        Http.mockAccessDeniedError()
+        cy.visit(`/surveys/${faker.datatype.uuid()}`)
+        Helper.testUrl('/login')
     })
 })
