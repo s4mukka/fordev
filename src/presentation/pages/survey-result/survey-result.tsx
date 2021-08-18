@@ -27,7 +27,8 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
     const onAnswer = async (answer: string): Promise<void> => {
         setState(old => ({ ...old, isLoading: true }))
         try {
-            await saveSurveyResult.save({ answer })
+            const surveyResult = await saveSurveyResult.save({ answer })
+            setState(old => ({ ...old, surveyResult, isLoading: false }))
         } catch (error) {
             handleError(error)
         }
