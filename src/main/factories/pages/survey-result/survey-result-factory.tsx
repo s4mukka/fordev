@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import { makeRemoteLoadSurveyResult } from '@/main/factories/usecases'
+import { makeRemoteLoadSurveyResult, makeRemoteSaveSurveyResult } from '@/main/factories/usecases'
 
 import { SurveyResult } from '@/presentation/pages'
 
@@ -10,6 +10,7 @@ export const makeSurveyResult: React.FC = () => {
     return (
         <SurveyResult
             loadSurveyResult={makeRemoteLoadSurveyResult(surveyId)}
+            saveSurveyResult={makeRemoteSaveSurveyResult(surveyId)}
         />
     )
 }
