@@ -14,7 +14,7 @@ type Props = {
 
 const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: Props) => {
     const handleError = useErrorHandler((error: Error) => {
-        setState(old => ({ ...old, surveyResult: null, error: error.message }))
+        setState(old => ({ ...old, surveyResult: null, error: error.message, isLoading: false }))
     })
 
     const [state, setState] = useState({
@@ -26,7 +26,11 @@ const SurveyResult: React.FC<Props> = ({ loadSurveyResult, saveSurveyResult }: P
 
     const onAnswer = async (answer: string): Promise<void> => {
         setState(old => ({ ...old, isLoading: true }))
-        await saveSurveyResult.save({ answer })
+        try {
+            await saveSurveyResult.save({ answer })
+        } catch (error) {
+            handleError(error)
+        }
     }
 
     useEffect(() => {
