@@ -5,29 +5,42 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 
 import { SurveyResult } from '@/presentation/pages'
 import { ApiContext } from '@/presentation/contexts'
-import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel } from '@/domain/test'
+import { LoadSurveyResultSpy, mockAccountModel, mockSurveyResultModel, SaveSurveyResultSpy } from '@/domain/test'
 import { AccessDeniedError, UnexpectedError } from '@/domain/errors'
 import { AccountModel } from '@/domain/models'
 
 type SutTypes = {
     loadSurveyResultSpy: LoadSurveyResultSpy
+    saveSurveyResultSpy: SaveSurveyResultSpy
     history: MemoryHistory
     setCurrentAccountMock: (account: AccountModel) => void
 }
 
-const makeSut = (loadSurveyResultSpy = new LoadSurveyResultSpy()): SutTypes => {
+type SutParams = {
+    loadSurveyResultSpy?: LoadSurveyResultSpy
+    saveSurveyResultSpy?: SaveSurveyResultSpy
+}
+
+const makeSut = ({
+    loadSurveyResultSpy = new LoadSurveyResultSpy(),
+    saveSurveyResultSpy = new SaveSurveyResultSpy()
+}: SutParams = {}): SutTypes => {
     const history = createMemoryHistory({ initialEntries: ['/', '/surveys/any_id'], initialIndex: 1 })
     const setCurrentAccountMock = jest.fn()
     render(
         <ApiContext.Provider value={{ setCurrentAccount: setCurrentAccountMock, getCurrentAccount: () => mockAccountModel() }}>
             <Router history={history}>
-                <SurveyResult loadSurveyResult={loadSurveyResultSpy}/>
+                <SurveyResult
+                    loadSurveyResult={loadSurveyResultSpy}
+                    saveSurveyResult={saveSurveyResultSpy}
+                />
             </Router>
         </ApiContext.Provider>
     )
 
     return {
         loadSurveyResultSpy,
+        saveSurveyResultSpy,
         history,
         setCurrentAccountMock
     }
@@ -58,7 +71,7 @@ describe('SurveyResult Component', () => {
             date: new Date('2020-12-12T00:00:00')
         })
         loadSurveyResultSpy.surveyResult = surveyResult
-        makeSut(loadSurveyResultSpy)
+        makeSut({ loadSurveyResultSpy })
         await waitFor(() => screen.getByTestId('survey-result'))
 
         expect(screen.getByTestId('day')).toHaveTextContent('12')
@@ -86,7 +99,7 @@ describe('SurveyResult Component', () => {
         const error = new UnexpectedError()
         jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(error)
 
-        makeSut(loadSurveyResultSpy)
+        makeSut({ loadSurveyResultSpy })
 
         await waitFor(() => screen.getByTestId('survey-result'))
 
@@ -100,7 +113,7 @@ describe('SurveyResult Component', () => {
         const error = new AccessDeniedError()
         jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(error)
 
-        const { history, setCurrentAccountMock } = makeSut(loadSurveyResultSpy)
+        const { history, setCurrentAccountMock } = makeSut({ loadSurveyResultSpy })
 
         await waitFor(() => screen.getByTestId('survey-result'))
 
@@ -112,7 +125,7 @@ describe('SurveyResult Component', () => {
         const loadSurveyResultSpy = new LoadSurveyResultSpy()
         jest.spyOn(loadSurveyResultSpy, 'load').mockRejectedValueOnce(new UnexpectedError())
 
-        makeSut(loadSurveyResultSpy)
+        makeSut({ loadSurveyResultSpy })
 
         await waitFor(() => screen.getByTestId('survey-result'))
 
@@ -140,5 +153,18 @@ describe('SurveyResult Component', () => {
         const answersWrap = screen.queryAllByTestId('answer-wrap')
         fireEvent.click(answersWrap[0])
         expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
+    })
+
+    test('Should call SaveSurveyResult on non active answer click', async () => {
+        const { saveSurveyResultSpy, loadSurveyResultSpy } = makeSut()
+
+        await waitFor(() => screen.getByTestId('survey-result'))
+
+        const answersWrap = screen.queryAllByTestId('answer-wrap')
+        fireEvent.click(answersWrap[1])
+        expect(screen.queryByTestId('loading')).toBeInTheDocument()
+        expect(saveSurveyResultSpy.params).toEqual({
+            answer: loadSurveyResultSpy.surveyResult.answers[1].answer
+        })
     })
 })
