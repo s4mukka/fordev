@@ -2,13 +2,15 @@ import * as Http from './http-mocks'
 
 import faker from 'faker'
 
-export const mockUnexpectedError = (): void => Http.mockServerError(/surveys/, 'GET')
-export const mockAccessDeniedError = (): void => Http.mockForbiddenError(/surveys/, 'GET')
-export const mockOk = (): LoadSurveyResult.Model => {
+export const mockLoadUnexpectedError = (): void => Http.mockServerError(/surveys/, 'GET')
+export const mockLoadAccessDeniedError = (): void => Http.mockForbiddenError(/surveys/, 'GET')
+export const mockLoadOk = (): LoadSurveyResult.Model => {
     const response = mockSurveyResultModel()
     Http.mockOk(/surveys/, 'GET', response)
     return response
 }
+
+export const mockSaveUnexpectedError = (): void => Http.mockServerError(/surveys/, 'PUT')
 
 const mockSurveyResultModel = (): LoadSurveyResult.Model => ({
     question: faker.random.words(),
