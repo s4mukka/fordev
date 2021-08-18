@@ -4,15 +4,15 @@ import faker from 'faker'
 
 export const mockUnexpectedError = (): void => Http.mockServerError(/surveys/, 'GET')
 export const mockAccessDeniedError = (): void => Http.mockForbiddenError(/surveys/, 'GET')
-export const mockOk = (): void => Http.mockOk(/surveys/, 'GET', mockSurveyResultModel())
+export const mockOk = (): LoadSurveyResult.Model => {
+    const response = mockSurveyResultModel()
+    Http.mockOk(/surveys/, 'GET', response)
+    return response
+}
 
-const mockSurveyResultModel = (
-    date: Date = faker.date.past(),
-    question: string = faker.random.words(10),
-    didAnswer: boolean = faker.datatype.boolean()
-): LoadSurveyResult.Model => ({
-    question,
-    date,
+const mockSurveyResultModel = (): LoadSurveyResult.Model => ({
+    question: faker.random.words(),
+    date: new Date('2018-02-03T00:00:00'),
     answers: [
         {
             image: faker.image.image(),

@@ -28,4 +28,23 @@ describe('SurveyResult', () => {
         cy.visit(`/surveys/${faker.datatype.uuid()}`)
         Helper.testUrl('/login')
     })
+
+    it('Should present survey result', () => {
+        const surveyResult = Http.mockOk()
+        cy.visit(`/surveys/${faker.datatype.uuid()}`)
+        cy.getByTestId('question').should('have.text', surveyResult.question)
+        cy.getByTestId('day').should('have.text', '03')
+        cy.getByTestId('month').should('have.text', 'fev')
+        cy.getByTestId('year').should('have.text', '2018')
+        cy.get('li:nth-child(1)').then(li => {
+            assert.equal(li.find('[data-testid="answer"]').text(), surveyResult.answers[0].answer)
+            assert.equal(li.find('[data-testid="image"]').attr('src'), surveyResult.answers[0].image)
+            assert.equal(li.find('[data-testid="percent"]').text(), `${surveyResult.answers[0].percent}%`)
+        })
+        cy.get('li:nth-child(2)').then(li => {
+            assert.equal(li.find('[data-testid="answer"]').text(), surveyResult.answers[1].answer)
+            assert.notExists(li.find('[data-testid="image"]'))
+            assert.equal(li.find('[data-testid="percent"]').text(), `${surveyResult.answers[1].percent}%`)
+        })
+    })
 })
