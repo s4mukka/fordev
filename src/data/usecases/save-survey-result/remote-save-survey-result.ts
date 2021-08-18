@@ -16,8 +16,12 @@ export class RemoteSaveSurveyResult implements SaveSurveyResult {
             body: params
         })
 
+        const remoteSurveyResult = httpResponse.body ?? undefined
         switch (httpResponse.statusCode) {
-            case HttpStatusCode.ok: return null
+            case HttpStatusCode.ok: return {
+                ...remoteSurveyResult,
+                date: new Date(remoteSurveyResult?.date)
+            }
             case HttpStatusCode.forbidden: throw new AccessDeniedError()
             default: throw new UnexpectedError()
         }
