@@ -66,9 +66,9 @@ describe('SurveyResult Component', () => {
         expect(screen.getByTestId('year')).toHaveTextContent('2020')
         expect(screen.getByTestId('question')).toHaveTextContent(surveyResult.question)
         expect(screen.getByTestId('answers').childElementCount).toBe(2)
-        const answerWrap = screen.queryAllByTestId('answer-wrap')
-        expect(answerWrap[0]).toHaveClass('active')
-        expect(answerWrap[1]).not.toHaveClass('active')
+        const answersWrap = screen.queryAllByTestId('answer-wrap')
+        expect(answersWrap[0]).toHaveClass('active')
+        expect(answersWrap[1]).not.toHaveClass('active')
         const images = screen.queryAllByTestId('image')
         expect(images[0]).toHaveAttribute('src', surveyResult.answers[0].image)
         expect(images[0]).toHaveAttribute('alt', surveyResult.answers[0].answer)
@@ -130,5 +130,15 @@ describe('SurveyResult Component', () => {
 
         fireEvent.click(screen.getByTestId('back-button'))
         expect(history.location.pathname).toBe('/')
+    })
+
+    test('Should not present Loading on active answer click', async () => {
+        makeSut()
+
+        await waitFor(() => screen.getByTestId('survey-result'))
+
+        const answersWrap = screen.queryAllByTestId('answer-wrap')
+        fireEvent.click(answersWrap[0])
+        expect(screen.queryByTestId('loading')).not.toBeInTheDocument()
     })
 })
